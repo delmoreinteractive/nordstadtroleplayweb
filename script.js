@@ -1,4 +1,4 @@
-/* =========================================================
+====================================================
    NORDSTADT ROLEPLAY — ZENTRALE KONFIGURATION
    Trage Links, Status, Management und Events nur hier ein.
    ========================================================= */
@@ -23,10 +23,11 @@ const siteConfig = {
   },
 
   status: {
+    lastUpdated: "20.07.2026",
     overall: "development",
     headline: "Nordstadt befindet sich in Entwicklung.",
     description:
-      "Die Website und der Discord sind erreichbar. Das Roblox-Spiel wird derzeit aktiv entwickelt und ist noch nicht öffentlich spielbar.",
+      "Website und Discord sind erreichbar. Das Roblox-Spiel wird aktuell aktiv aufgebaut und ist noch nicht öffentlich spielbar.",
 
     services: {
       website: {
@@ -42,8 +43,8 @@ const siteConfig = {
         label: "Online"
       },
       applications: {
-        state: "offline",
-        label: "Geschlossen"
+        state: "online",
+        label: "Geöffnet"
       }
     }
   }
@@ -60,7 +61,7 @@ const siteConfig = {
 const managementRoles = [
   {
     role: "Inhaber",
-    holder: "Nicht öffentlich",
+    holder: "Besetzt",
     filled: true,
     count: 1,
     capacity: "1",
@@ -76,7 +77,7 @@ const managementRoles = [
   },
   {
     role: "Stv. Projekt Manager",
-    holder: "Nicht öffentlich",
+    holder: "Besetzt",
     filled: true,
     count: 1,
     capacity: "1",
@@ -132,7 +133,7 @@ const managementRoles = [
   },
   {
     role: "Communitymanager",
-    holder: "Nicht öffentlich",
+    holder: "Besetzt",
     filled: true,
     count: 1,
     capacity: "1",
@@ -403,19 +404,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (stateElement) stateElement.textContent = service.label;
   });
 
-  const statusStart = Date.now();
   const lastCheck = document.getElementById("lastStatusCheck");
 
-  const updateStatusAge = () => {
-    if (!lastCheck) return;
-    const secondsPassed = Math.floor((Date.now() - statusStart) / 1000);
-
-    if (secondsPassed < 5) lastCheck.textContent = "gerade eben";
-    else if (secondsPassed < 60) lastCheck.textContent = `vor ${secondsPassed} Sekunden`;
-    else lastCheck.textContent = `vor ${Math.floor(secondsPassed / 60)} Minuten`;
-  };
-
-  window.setInterval(updateStatusAge, 5000);
+  if (lastCheck) {
+    lastCheck.textContent = siteConfig.status.lastUpdated;
+  }
 
   /* Management */
   const managementList = document.getElementById("managementList");
