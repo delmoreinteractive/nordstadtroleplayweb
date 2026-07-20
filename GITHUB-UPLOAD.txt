@@ -1,0 +1,18 @@
+NORDSTADT ROLEPLAY — GITHUB UPLOAD
+==================================
+
+1. ZIP vollständig entpacken.
+2. Im GitHub-Repository „Add file“ > „Upload files“ öffnen.
+3. Alle Dateien gleichzeitig hochladen.
+4. Vorhandene Dateien ersetzen und „Commit changes“ anklicken.
+5. GitHub Pages: Settings > Pages > main > / (root).
+6. Danach die Seite einmal mit Strg + F5 neu laden.
+
+Wichtige Dateien im Repository-Root:
+- .nojekyll
+- index.html
+- style.css
+- script.js
+- favicon.svg
+- nordstadt-cover.jpg
+- nordstadt-social.jpg
