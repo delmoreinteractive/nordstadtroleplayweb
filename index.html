@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nordstadt Roleplay – deutsches Roblox-Stadtroleplay mit strukturiertem Management, Events und Community.">
+  <meta name="theme-color" content="#111216">
+
+  <meta property="og:title" content="Nordstadt Roleplay">
+  <meta property="og:description" content="Dein Leben. Deine Rolle. Deine Nordstadt.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/nordstadt-social.jpg">
+
+  <title>Nordstadt Roleplay</title>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__sign">
+      <span>NRP</span>
+      <small>NORDSTADT</small>
+    </div>
+    <div class="loader__bar"><i></i></div>
+    <p>Stadt wird geladen …</p>
+  </div>
+
+  <div class="noise" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#home" aria-label="Nordstadt Roleplay – Startseite">
+      <span class="brand__badge">NRP</span>
+      <span class="brand__text">
+        <strong>NORDSTADT</strong>
+        <small>ROLEPLAY</small>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Hauptnavigation">
+      <a href="#home">Home</a>
+      <a href="#status">Status</a>
+      <a href="#management">Management Team</a>
+      <a href="#events">Events</a>
+      <a href="#infos">Infos</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="button button--small button--ghost" data-link="discord" href="#community">
+        Discord
+      </a>
+      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span>
+        <b class="sr-only">Menü öffnen</b>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__inner">
+      <p class="label">NORDSTADT / NAVIGATION</p>
+      <nav>
+        <a href="#home"><span>01</span>Home</a>
+        <a href="#status"><span>02</span>Status</a>
+        <a href="#management"><span>03</span>Management Team</a>
+        <a href="#events"><span>04</span>Events</a>
+        <a href="#infos"><span>05</span>Infos</a>
+        <a href="#community"><span>06</span>Community</a>
+      </nav>
+      <div class="mobile-menu__footer">
+        <span>Roblox Community-Projekt</span>
+        <a data-link="discord" href="#community">Discord öffnen ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="hero__background" aria-hidden="true">
+        <img src="assets/nordstadt-cover.jpg" alt="">
+        <div class="hero__overlay"></div>
+        <div class="hero__grid"></div>
+      </div>
+
+      <div class="hero__content">
+        <p class="eyebrow reveal">DEUTSCHES ROBLOX STADTROLEPLAY</p>
+
+        <h1 class="reveal">
+          Dein Leben.<br>
+          Deine Rolle.<br>
+          <em>Deine Nordstadt.</em>
+        </h1>
+
+        <p class="hero__lead reveal">
+          Eine lebendige Roleplay-Stadt mit klaren Strukturen, aktiver Community,
+          spannenden Berufen und regelmäßigen Events.
+        </p>
+
+        <div class="hero__actions reveal">
+          <a class="button button--primary magnetic" href="#status">
+            Entwicklungsstatus <span>↘</span>
+          </a>
+          <a class="button button--glass magnetic" data-link="discord" href="#community">
+            Discord beitreten <span>↗</span>
+          </a>
+        </div>
+
+        <div class="hero__facts reveal">
+          <div>
+            <span>PROJEKT</span>
+            <strong>Nordstadt RP</strong>
+          </div>
+          <div>
+            <span>PLATTFORM</span>
+            <strong>Roblox</strong>
+          </div>
+          <div>
+            <span>SPRACHE</span>
+            <strong>Deutsch</strong>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero__dispatch reveal">
+        <div class="dispatch__top">
+          <span class="live-dot"></span>
+          <strong>STADTLEITSTELLE</strong>
+          <small id="heroClock">--:--</small>
+        </div>
+
+        <div class="dispatch__message">
+          <p>AKTUELLE MELDUNG</p>
+          <h2 id="dispatchTitle">Willkommen in Nordstadt</h2>
+          <span id="dispatchText">
+            Entdecke die Stadt, wähle deine Rolle und werde Teil der Community.
+          </span>
+        </div>
+
+        <div class="dispatch__line">
+          <span>ÖFFENTLICHER STATUS</span>
+          <strong id="heroStatus">ONLINE</strong>
+        </div>
+      </aside>
+
+      <a class="hero__scroll" href="#status">
+        <span>Stadt erkunden</span>
+        <i></i>
+      </a>
+    </section>
+
+    <div class="city-ticker" aria-hidden="true">
+      <div class="city-ticker__track">
+        <span>NORDSTADT ROLEPLAY</span><i>◆</i>
+        <span>COMMUNITY</span><i>◆</i>
+        <span>STADTVERWALTUNG</span><i>◆</i>
+        <span>EVENTS</span><i>◆</i>
+        <span>ROBLOX</span><i>◆</i>
+        <span>NORDSTADT ROLEPLAY</span><i>◆</i>
+        <span>COMMUNITY</span><i>◆</i>
+        <span>STADTVERWALTUNG</span><i>◆</i>
+        <span>EVENTS</span><i>◆</i>
+        <span>ROBLOX</span><i>◆</i>
+      </div>
+    </div>
+
+    <section class="section status-section" id="status">
+      <div class="section-number">01 / STATUS</div>
+
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow reveal">LIVE-ÜBERSICHT</p>
+          <h2 class="reveal">Was läuft<br><em>in der Stadt?</em></h2>
+        </div>
+        <p class="section-intro reveal">
+          Alle Zustände können ganz oben in der <code>script.js</code> angepasst
+          oder später mit einer echten API verbunden werden.
+        </p>
+      </div>
+
+      <div class="status-layout">
+        <article class="status-overview reveal">
+          <div class="status-overview__top">
+            <div>
+              <span class="status-pulse" id="overallStatusPulse"></span>
+              <p>GESAMTSTATUS</p>
+            </div>
+            <strong id="overallStatusText">ONLINE</strong>
+          </div>
+
+          <h3 id="statusHeadline">Nordstadt ist erreichbar.</h3>
+          <p id="statusDescription">
+            Website und Community-Bereiche sind verfügbar. Der Spielstatus wird
+            aktuell manuell gepflegt.
+          </p>
+
+          <div class="status-overview__meta">
+            <span>LETZTE PRÜFUNG</span>
+            <strong id="lastStatusCheck">gerade eben</strong>
+          </div>
+        </article>
+
+        <div class="service-grid" id="serviceGrid">
+          <article class="service-card reveal" data-service="website">
+            <div class="service-card__head">
+              <span>01</span>
+              <i class="service-indicator"></i>
+            </div>
+            <h3>Website</h3>
+            <p>Öffentliche Informationsseite</p>
+            <strong class="service-state">Online</strong>
+          </article>
+
+          <article class="service-card reveal" data-service="game">
+            <div class="service-card__head">
+              <span>02</span>
+              <i class="service-indicator"></i>
+            </div>
+            <h3>Spielserver</h3>
+            <p>Nordstadt Roblox-Erlebnis</p>
+            <strong class="service-state">In Entwicklung</strong>
+          </article>
+
+          <article class="service-card reveal" data-service="discord">
+            <div class="service-card__head">
+              <span>03</span>
+              <i class="service-indicator"></i>
+            </div>
+            <h3>Discord</h3>
+            <p>Community und Support</p>
+            <strong class="service-state">Online</strong>
+          </article>
+
+          <article class="service-card reveal" data-service="applications">
+            <div class="service-card__head">
+              <span>04</span>
+              <i class="service-indicator"></i>
+            </div>
+            <h3>Bewerbungen</h3>
+            <p>Team- und Fraktionsbewerbungen</p>
+            <strong class="service-state">Geschlossen</strong>
+          </article>
+        </div>
+      </div>
+
+      <div class="status-note reveal">
+        <span>HINWEIS</span>
+        <p>
+          Der Statusbereich zeigt zunächst konfigurierbare Angaben und ist nicht
+          automatisch mit Roblox- oder Discord-Servern verbunden.
+        </p>
+      </div>
+    </section>
+
+    <section class="section management-section" id="management">
+      <div class="section-number section-number--dark">02 / MANAGEMENT</div>
+
+      <div class="section-heading section-heading--dark">
+        <div>
+          <p class="eyebrow reveal">STADTLEITUNG</p>
+          <h2 class="reveal">Struktur schafft<br><em>gutes Roleplay.</em></h2>
+        </div>
+        <p class="section-intro reveal">
+          Die Hierarchie basiert auf der vorhandenen Management-Struktur. Namen und
+          Besetzung können zentral in der JavaScript-Datei gepflegt werden.
+        </p>
+      </div>
+
+      <div class="management-toolbar reveal">
+        <div>
+          <span id="filledRoles">0</span>
+          <small>BESETZTE POSITIONEN</small>
+        </div>
+        <div>
+          <span id="openRoles">0</span>
+          <small>OFFENE POSITIONEN</small>
+        </div>
+
+        <div class="management-filter" aria-label="Management filtern">
+          <button class="is-active" type="button" data-management-filter="all">Alle</button>
+          <button type="button" data-management-filter="filled">Besetzt</button>
+          <button type="button" data-management-filter="open">Offen</button>
+        </div>
+      </div>
+
+      <div class="management-update reveal">
+        <div>
+          <span class="management-update__pulse" aria-hidden="true"></span>
+          <strong>Management-Stellenstatus wird wöchentlich aktualisiert</strong>
+        </div>
+        <p>
+          Letzte Aktualisierung:
+          <span id="managementLastUpdated">–</span>
+          <i aria-hidden="true">•</i>
+          Rhythmus:
+          <span id="managementUpdateFrequency">Wöchentlich</span>
+        </p>
+      </div>
+
+      <div class="management-list" id="managementList"></div>
+    </section>
+
+    <section class="section events-section" id="events">
+      <div class="events-background" aria-hidden="true">
+        <span>EVENT</span>
+      </div>
+
+      <div class="section-number section-number--dark">03 / EVENTS</div>
+
+      <div class="section-heading section-heading--dark">
+        <div>
+          <p class="eyebrow reveal">STADTLEBEN</p>
+          <h2 class="reveal">Mehr als nur<br><em>Alltag.</em></h2>
+        </div>
+        <p class="section-intro reveal">
+          Geplante Community-Abende, Fraktionsaktionen und besondere Szenarien
+          sorgen für Abwechslung in Nordstadt.
+        </p>
+      </div>
+
+      <div class="events-layout">
+        <article class="featured-event reveal">
+          <div class="featured-event__visual">
+            <div class="featured-event__road" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="featured-event__tag">NÄCHSTES EVENT</span>
+          </div>
+
+          <div class="featured-event__content">
+            <div class="event-date">
+              <strong id="featuredDay">–</strong>
+              <span id="featuredMonth">FOLGT</span>
+            </div>
+
+            <div>
+              <p class="event-type" id="featuredType">COMMUNITY-EVENT</p>
+              <h3 id="featuredTitle">Event wird angekündigt</h3>
+              <p id="featuredDescription">
+                Der genaue Termin und alle Details werden rechtzeitig auf dem
+                Discord-Server veröffentlicht.
+              </p>
+            </div>
+
+            <a data-link="discord" href="#community">
+              Event-Updates erhalten <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <div class="event-list" id="eventList"></div>
+      </div>
+    </section>
+
+    <section class="section info-section" id="infos">
+      <div class="section-number">04 / INFORMATIONEN</div>
+
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow reveal">DEIN WEG NACH NORDSTADT</p>
+          <h2 class="reveal">Ankommen.<br><em>Verstehen. Loslegen.</em></h2>
+        </div>
+        <p class="section-intro reveal">
+          Für ein starkes Roleplay zählen nicht nur Fahrzeuge und Berufe, sondern
+          vor allem Fairness, Kommunikation und glaubwürdige Situationen.
+        </p>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-card reveal">
+          <span>01</span>
+          <h3>Realistisches Roleplay</h3>
+          <p>
+            Spiele deine Rolle glaubwürdig, respektiere laufende Situationen und
+            gib anderen ausreichend Raum für ihre Geschichte.
+          </p>
+        </article>
+
+        <article class="info-card reveal">
+          <span>02</span>
+          <h3>Starke Community</h3>
+          <p>
+            Der Discord ist die zentrale Anlaufstelle für Neuigkeiten, Support,
+            Fraktionen, Bewerbungen und den Austausch mit anderen Spielern.
+          </p>
+        </article>
+
+        <article class="info-card reveal">
+          <span>03</span>
+          <h3>Klare Regeln</h3>
+          <p>
+            Einheitliche Regeln und ein strukturiertes Management sorgen für ein
+            faires, nachvollziehbares und angenehmes Spielerlebnis.
+          </p>
+        </article>
+
+        <article class="info-card reveal">
+          <span>04</span>
+          <h3>Aktive Entwicklung</h3>
+          <p>
+            Systeme, Stadtbereiche und Inhalte werden schrittweise erweitert und
+            gemeinsam mit der Community verbessert.
+          </p>
+        </article>
+      </div>
+
+      <div class="rules-panel reveal">
+        <div class="rules-panel__intro">
+          <p class="eyebrow">GRUNDPRINZIPIEN</p>
+          <h3>Die Stadt funktioniert,<br>wenn alle mitspielen.</h3>
+        </div>
+
+        <ol>
+          <li><span>01</span><p>Respektiere Spieler, Teammitglieder und laufende RP-Situationen.</p></li>
+          <li><span>02</span><p>Kein Trolling, Random Deathmatch oder absichtliches Stören.</p></li>
+          <li><span>03</span><p>Nutze Informationen nur, wenn deine Rolle sie im Spiel erhalten hat.</p></li>
+          <li><span>04</span><p>Folge Anweisungen des Teams und melde Probleme über die vorgesehenen Wege.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="community" id="community">
+      <div class="community__background" aria-hidden="true">
+        <img src="assets/nordstadt-cover.jpg" alt="">
+      </div>
+
+      <div class="community__content">
+        <p class="eyebrow reveal">WILLKOMMEN IN DER COMMUNITY</p>
+        <h2 class="reveal">Nordstadt wartet<br><em>auf deine Geschichte.</em></h2>
+        <p class="reveal">
+          Erhalte Updates, finde Mitspieler, bewirb dich für Positionen und
+          verpasse keine wichtigen Ankündigungen.
+        </p>
+
+        <div class="community__actions reveal">
+          <a class="button button--primary magnetic" data-link="discord" href="#">
+            Discord beitreten <span>↗</span>
+          </a>
+          <a class="button button--glass magnetic" href="#status">
+            Spiel in Entwicklung <span>↘</span>
+          </a>
+        </div>
+
+        <div class="community__links reveal">
+          <a data-link="tiktok" href="#">TikTok ↗</a>
+          <a data-link="youtube" href="#">YouTube ↗</a>
+          <a data-link="instagram" href="#">Instagram ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__main">
+      <a class="brand brand--footer" href="#home">
+        <span class="brand__badge">NRP</span>
+        <span class="brand__text">
+          <strong>NORDSTADT</strong>
+          <small>ROLEPLAY</small>
+        </span>
+      </a>
+
+      <p>Dein Leben. Deine Rolle. Deine Nordstadt.</p>
+
+      <nav aria-label="Footer Navigation">
+        <a href="#status">Status</a>
+        <a href="#management">Management</a>
+        <a href="#events">Events</a>
+        <a href="#infos">Infos</a>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p>
+        © <span id="currentYear"></span> Nordstadt Roleplay. Alle Rechte vorbehalten.
+      </p>
+
+      <p class="footer__disclaimer">
+        Unabhängiges Roblox-Community-Projekt. Keine Verbindung zu realen Städten,
+        Behörden oder der Roblox Corporation.
+      </p>
+
+      <a class="delmore-credit" href="https://delmorecompanyconnect.github.io/web/" target="_blank" rel="noopener noreferrer">
+        Website erstellt & verwaltet von <strong>Delmore Studios</strong> ↗
+      </a>
+
+      <button id="backToTop" type="button">Nach oben ↑</button>
+    </div>
+  </footer>
+
+  <noscript>
+    <div class="noscript">Bitte aktiviere JavaScript für Status, Events und Management.</div>
+  </noscript>
+</body>
+</html>
