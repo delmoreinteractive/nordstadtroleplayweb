@@ -5,7 +5,7 @@
 
 const siteConfig = {
   links: {
-    discord: "",
+    discord: "https://discord.gg/fyNv6UFMDG",
     robloxGame: "",
     tiktok: "",
     youtube: "",
@@ -13,15 +13,20 @@ const siteConfig = {
   },
 
   dispatch: {
-    title: "Willkommen in Nordstadt",
-    text: "Entdecke die Stadt, wähle deine Rolle und werde Teil der Community."
+    title: "Nordstadt befindet sich im Aufbau",
+    text: "Das Roblox-Spiel ist aktuell in Entwicklung. Fortschritte und Ankündigungen findest du auf unserem Discord."
+  },
+
+  management: {
+    updateFrequency: "Wöchentlich",
+    lastUpdated: "20.07.2026"
   },
 
   status: {
-    overall: "online",
-    headline: "Nordstadt ist erreichbar.",
+    overall: "development",
+    headline: "Nordstadt befindet sich in Entwicklung.",
     description:
-      "Website und Community-Bereiche sind verfügbar. Der Spielstatus wird aktuell manuell gepflegt.",
+      "Die Website und der Discord sind erreichbar. Das Roblox-Spiel wird derzeit aktiv entwickelt und ist noch nicht öffentlich spielbar.",
 
     services: {
       website: {
@@ -46,10 +51,11 @@ const siteConfig = {
 
 /*
   MANAGEMENT:
-  - filled: true = Position besetzt
-  - filled: false = Position offen
-  - holder: Anzeigename; bei offenen Positionen leer lassen
-  - count: sichtbare Anzahl aus der aktuellen Struktur
+  - filled: true = Position ist besetzt
+  - filled: false = Position ist offen
+  - count: aktuell besetzte Plätze
+  - capacity: vorgesehene Plätze, zum Beispiel "1", "2" oder "2–4"
+  - Anzeige auf der Website: 1/1, 0/1, 0/2 oder 0/2–4
 */
 const managementRoles = [
   {
@@ -57,6 +63,7 @@ const managementRoles = [
     holder: "Nicht öffentlich",
     filled: true,
     count: 1,
+    capacity: "1",
     department: "Projektleitung"
   },
   {
@@ -64,6 +71,7 @@ const managementRoles = [
     holder: "",
     filled: false,
     count: 0,
+    capacity: "1",
     department: "Projektleitung"
   },
   {
@@ -71,13 +79,15 @@ const managementRoles = [
     holder: "Nicht öffentlich",
     filled: true,
     count: 1,
+    capacity: "1",
     department: "Projektleitung"
   },
   {
     role: "Geschäftsführung",
-    holder: "2 Teammitglieder",
-    filled: true,
-    count: 2,
+    holder: "",
+    filled: false,
+    count: 0,
+    capacity: "1",
     department: "Geschäftsführung"
   },
   {
@@ -85,13 +95,15 @@ const managementRoles = [
     holder: "",
     filled: false,
     count: 0,
+    capacity: "2–4",
     department: "Personal"
   },
   {
     role: "Management Leitung",
-    holder: "Nicht öffentlich",
-    filled: true,
-    count: 1,
+    holder: "",
+    filled: false,
+    count: 0,
+    capacity: "2",
     department: "Management"
   },
   {
@@ -99,13 +111,15 @@ const managementRoles = [
     holder: "",
     filled: false,
     count: 0,
+    capacity: "2–4",
     department: "Entwicklung"
   },
   {
     role: "Entwicklungsmanagement | Game",
-    holder: "Nicht öffentlich",
-    filled: true,
-    count: 1,
+    holder: "",
+    filled: false,
+    count: 0,
+    capacity: "2–4",
     department: "Entwicklung"
   },
   {
@@ -113,13 +127,15 @@ const managementRoles = [
     holder: "",
     filled: false,
     count: 0,
+    capacity: "2–4",
     department: "Qualität"
   },
   {
     role: "Communitymanager",
-    holder: "",
-    filled: false,
-    count: 0,
+    holder: "Nicht öffentlich",
+    filled: true,
+    count: 1,
+    capacity: "1",
     department: "Community"
   },
   {
@@ -127,6 +143,7 @@ const managementRoles = [
     holder: "",
     filled: false,
     count: 0,
+    capacity: "2–4",
     department: "Social Media"
   }
 ];
@@ -348,11 +365,34 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("statusHeadline").textContent = siteConfig.status.headline;
   document.getElementById("statusDescription").textContent = siteConfig.status.description;
 
-  if (overallState !== "online") {
-    statusPulse.style.background = overallState === "maintenance" ? "var(--orange)" : "var(--red)";
-    overallText.style.color = overallState === "maintenance" ? "#a66b18" : "var(--red-dark)";
-    heroStatus.style.color = overallState === "maintenance" ? "var(--orange)" : "var(--red-soft)";
-  }
+  const overallColors = {
+    online: {
+      pulse: "var(--green)",
+      lightText: "#3f8d5e",
+      darkText: "var(--green)"
+    },
+    maintenance: {
+      pulse: "var(--orange)",
+      lightText: "#a66b18",
+      darkText: "var(--orange)"
+    },
+    offline: {
+      pulse: "var(--red)",
+      lightText: "var(--red-dark)",
+      darkText: "var(--red-soft)"
+    },
+    development: {
+      pulse: "var(--gray)",
+      lightText: "#666a75",
+      darkText: "#b7bac3"
+    }
+  };
+
+  const overallColor = overallColors[overallState] || overallColors.development;
+
+  if (statusPulse) statusPulse.style.background = overallColor.pulse;
+  if (overallText) overallText.style.color = overallColor.lightText;
+  if (heroStatus) heroStatus.style.color = overallColor.darkText;
 
   Object.entries(siteConfig.status.services).forEach(([key, service]) => {
     const card = document.querySelector(`[data-service="${key}"]`);
@@ -381,37 +421,92 @@ document.addEventListener("DOMContentLoaded", () => {
   const managementList = document.getElementById("managementList");
   const filledRoles = document.getElementById("filledRoles");
   const openRoles = document.getElementById("openRoles");
+  const managementLastUpdated = document.getElementById("managementLastUpdated");
+  const managementUpdateFrequency = document.getElementById("managementUpdateFrequency");
+
+  if (managementLastUpdated) {
+    managementLastUpdated.textContent = siteConfig.management.lastUpdated;
+  }
+
+  if (managementUpdateFrequency) {
+    managementUpdateFrequency.textContent = siteConfig.management.updateFrequency;
+  }
 
   const renderManagement = () => {
     if (!managementList) return;
 
     managementList.innerHTML = managementRoles.map((role, index) => {
       const number = String(index + 1).padStart(2, "0");
+      const currentCount = Number(role.count) || 0;
+      const capacity = String(role.capacity || "1");
+      const ratio = `${currentCount}/${capacity}`;
+      const ratioFontSize = ratio.length > 4 ? "11px" : "16px";
+
       const holder = role.filled
         ? (role.holder || "Besetzt")
-        : "Position aktuell offen";
+        : `${ratio} – Position aktuell offen`;
 
       return `
         <article class="management-role reveal is-visible" data-filled="${role.filled}">
           <span class="management-role__index">${number}</span>
+
           <h3>${escapeHtml(role.role)}</h3>
+
           <div class="management-role__person">
             <span>${escapeHtml(role.department)}</span>
             <strong>${escapeHtml(holder)}</strong>
           </div>
+
           <span class="management-role__status">
             ${role.filled ? "Besetzt" : "Offen"}
           </span>
-          <span class="management-role__count">${Number(role.count) || 0}</span>
+
+          <span
+            class="management-role__count"
+            style="font-size: ${ratioFontSize};"
+            title="${escapeHtml(ratio)} Plätze belegt"
+            aria-label="${escapeHtml(ratio)} Plätze belegt"
+          >
+            ${escapeHtml(ratio)}
+          </span>
         </article>
       `;
     }).join("");
 
-    const filledCount = managementRoles.filter((role) => role.filled).length;
-    const openCount = managementRoles.length - filledCount;
+    const filledCount = managementRoles.reduce(
+      (sum, role) => sum + (Number(role.count) || 0),
+      0
+    );
 
-    if (filledRoles) filledRoles.textContent = String(filledCount);
-    if (openRoles) openRoles.textContent = String(openCount);
+    const openMinimum = managementRoles.reduce((sum, role) => {
+      const currentCount = Number(role.count) || 0;
+      const capacityNumbers =
+        String(role.capacity).match(/\d+/g)?.map(Number) || [0];
+
+      return sum + Math.max(0, capacityNumbers[0] - currentCount);
+    }, 0);
+
+    const openMaximum = managementRoles.reduce((sum, role) => {
+      const currentCount = Number(role.count) || 0;
+      const capacityNumbers =
+        String(role.capacity).match(/\d+/g)?.map(Number) || [0];
+
+      return sum + Math.max(
+        0,
+        capacityNumbers[capacityNumbers.length - 1] - currentCount
+      );
+    }, 0);
+
+    if (filledRoles) {
+      filledRoles.textContent = String(filledCount);
+    }
+
+    if (openRoles) {
+      openRoles.textContent =
+        openMinimum === openMaximum
+          ? String(openMinimum)
+          : `${openMinimum}–${openMaximum}`;
+    }
   };
 
   renderManagement();
@@ -502,3 +597,4 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
