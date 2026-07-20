@@ -1,0 +1,27 @@
+NORDSTADT ROLEPLAY — GITHUB FLAT-UPLOAD
+=======================================
+
+Diese Version enthält ABSICHTLICH keinen assets-Ordner.
+
+Nach dem Entpacken alle Dateien gemeinsam zu GitHub hochladen:
+
+.nojekyll
+favicon.svg
+GITHUB-UPLOAD.txt
+index.html
+nordstadt-cover.jpg
+nordstadt-social.jpg
+README.txt
+script.js
+style.css
+
+Vorgehen:
+1. ZIP vollständig entpacken.
+2. Im GitHub-Repository: Add file > Upload files.
+3. Alle neun sichtbaren Dateien gemeinsam markieren und hochladen.
+4. Prüfen, dass nordstadt-cover.jpg, nordstadt-social.jpg und favicon.svg
+   in der GitHub-Liste erscheinen.
+5. Commit changes anklicken.
+
+Die index.html ist bereits auf diese flache Dateistruktur angepasst.
+Es darf kein zusätzlicher Oberordner im Repository entstehen.
